@@ -12,8 +12,13 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
-  // 👇 ADD THIS EXACT BLOCK TO FORCE VERCEL TARGET:
   nitro: {
     preset: "netlify",
+  },
+  // 👇 THE FIX: Tell Vite to ignore these client-side packages during the SSR build
+  vite: {
+    ssr: {
+      external: ["@tanstack/react-query", "@tanstack/react-router"],
+    },
   },
 });
