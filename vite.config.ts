@@ -14,6 +14,6 @@ export default defineConfig({
   },
   // 👇 ADD THIS EXACT BLOCK TO FORCE VERCEL TARGET:
   nitro: {
-    preset: "vercel",
+    preset: "netlify",
   },
 });
