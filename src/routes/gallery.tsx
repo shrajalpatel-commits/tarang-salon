@@ -32,21 +32,22 @@ const GalleryRow = ({ title, images }: { title: string; images: string[] }) => {
   const duplicatedImages = [...images, ...images];
 
   return (
-    <section className="py-12 lg:py-16 overflow-hidden w-full relative border-b border-border/40 last:border-0">
+    <section className="py-8 md:py-12 lg:py-16 overflow-hidden w-full relative border-b border-border/40 last:border-0">
       <div className="container mx-auto px-4 mb-6 md:mb-8">
-        <div className="flex items-center gap-4">
-          <h2 className="bg-primary text-white px-8 py-3 rounded-full text-lg md:text-xl font-semibold tracking-[0.2em] uppercase">
+        <div className="flex items-center gap-3 md:gap-4">
+          {/* Scaled down text and padding for mobile to ensure long titles like "SKIN TREATMENT" fit */}
+          <h2 className="bg-primary text-white px-5 py-2 md:px-8 md:py-3 rounded-full text-xs sm:text-sm md:text-xl font-semibold tracking-[0.2em] uppercase">
             {title}
           </h2>
         
-          <div className="h-[2px] w-20 bg-primary/30" />
+          <div className="h-[2px] w-12 md:w-20 bg-primary/30" />
         </div>
       </div>
 
       <div className="w-full overflow-visible relative">
         <div
-          // We constrain the overall row height. You can adjust the 40vh/50vh to make the row taller or shorter.
-          className="flex w-max items-center gap-4 md:gap-8 px-4 animate-gallery-scroll h-[35vh] md:h-[45vh] min-h-[250px] max-h-[550px]"
+          // Adjusted min-height for mobile screens to prevent them from taking up too much vertical space
+          className="flex w-max items-center gap-3 md:gap-8 px-4 animate-gallery-scroll h-[30vh] md:h-[45vh] min-h-[200px] md:min-h-[250px] max-h-[550px]"
           style={{ animationPlayState: activeIndex !== null ? "paused" : "running" }}
         >
           {duplicatedImages.map((src, index) => {
@@ -65,8 +66,8 @@ const GalleryRow = ({ title, images }: { title: string; images: string[] }) => {
                   /* We let the width be auto, and apply the staggered height */
                   w-auto ${heightClass}
                   
-                  /* Zoom effects */
-                  ${isActive ? "scale-110 md:scale-125 z-20" : "z-10"}
+                  /* Zoom effects - slightly reduced mobile scale so it doesn't break boundaries */
+                  ${isActive ? "scale-105 md:scale-125 z-20" : "z-10"}
                   ${isOther ? "scale-90 opacity-60 z-0 grayscale-[20%]" : ""}
                   ${!isPaused ? "hover:scale-105" : ""}
                 `}
@@ -75,7 +76,7 @@ const GalleryRow = ({ title, images }: { title: string; images: string[] }) => {
                   src={src}
                   alt={`${title} gallery photo ${index + 1}`}
                   // 'max-w-none' is crucial here so Tailwind doesn't force a 100% max-width, allowing natural aspect ratios
-                  className="h-full w-auto max-w-none transition-all duration-700 border border-outline-variant/50"
+                  className="h-full w-auto max-w-none transition-all duration-700 border border-outline-variant/50 rounded-md md:rounded-none"
                   loading="lazy"
                 />
               </div>
@@ -92,26 +93,29 @@ function GalleryRouteComponent() {
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <SiteNav />
       
-      <main className="flex-grow pt-24 pb-12">
-        <div className="container mx-auto px-4 mb-16 text-center">
-          <span className="text-primary uppercase tracking-[0.3em] text-xs font-bold">
+      {/* ⚠️ overflow-x-hidden absolutely locks the mobile viewport from side-scrolling */}
+      <main className="flex-grow pt-16 md:pt-24 pb-12 overflow-x-hidden">
+        <div className="container mx-auto px-4 mb-10 md:mb-16 text-center">
+          <span className="text-primary uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-xs font-bold">
             TARANG GALLERY
           </span>
         
-          <h1 className="text-5xl md:text-6xl font-display mt-4 mb-6">
+          {/* Scaled main heading to prevent word-break layout issues on small phones */}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-display mt-3 md:mt-4 mb-4 md:mb-6 leading-tight">
             Transformations That
             <span className="block text-primary italic font-light">
               Speak For Themselves
             </span>
           </h1>
         
-          <p className="text-lg text-on-surface-variant max-w-2xl mx-auto">
+          {/* Added horizontal padding for mobile readability */}
+          <p className="text-sm md:text-lg text-on-surface-variant max-w-2xl mx-auto px-2 md:px-0">
             Discover real results, elegant styling, and confidence-enhancing treatments
             delivered by our expert team since 2012.
           </p>
         </div>
 
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-4 md:gap-0">
           {galleryData.map((section) => (
             <GalleryRow 
               key={section.title} 

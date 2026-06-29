@@ -56,7 +56,6 @@ function CountUp({
 
 function HomePage() {
 
-
 // for testimonial - start
   const testimonials = [
     {
@@ -85,7 +84,7 @@ function HomePage() {
     },
     {
       quote:
-        "KARISHMA combines clinical expertise with warmth and hospitality. Every visit feels like a self-care retreat.",
+        "TARANG combines clinical expertise with warmth and hospitality. Every visit feels like a self-care retreat.",
       author: "Mehak Singh",
       role: "Regular Client",
     },
@@ -159,39 +158,45 @@ function HomePage() {
   return (
     <div className="min-h-screen flex flex-col">
       <SiteNav />
-      <main className="relative flex-1">
+      {/* ⚠️ overflow-x-hidden added here to strictly prevent mobile side-scrolling */}
+      <main className="relative flex-1 overflow-x-hidden">
+        
         {/* Hero */}
-        <section className="max-w-[1400px] mx-auto px-6 md:px-12 py-20 md:py-28 grid grid-cols-1 md:grid-cols-10 gap-10 items-center">
-          <div className="md:col-span-4 relative order-2 md:order-1">
-            <div className="relative z-10 border-[14px] border-white shadow-2xl rounded-sm overflow-hidden -rotate-3 hover:rotate-0 transition-transform duration-500">
+        <section className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 py-12 md:py-28 grid grid-cols-1 md:grid-cols-10 gap-10 items-center">
+          <div className="md:col-span-4 relative order-2 md:order-1 px-4 md:px-0">
+            {/* Border adjusted for mobile */}
+            <div className="relative z-10 border-[8px] md:border-[14px] border-white shadow-2xl rounded-sm overflow-hidden -rotate-3 hover:rotate-0 transition-transform duration-500">
               <img src={IMG.homeBride} alt="Traditional Indian bride showcasing flawless wedding makeup and elegant jewelry" className="w-full aspect-[4/5] object-cover" />
             </div>
-            <div className="absolute -bottom-10 -right-6 w-44 h-44 bg-white/50 backdrop-blur-sm rounded-full p-2 z-20 border border-white">
+            {/* Overlay circle scaled down for mobile to prevent overflow */}
+            <div className="absolute -bottom-6 -right-2 md:-bottom-10 md:-right-6 w-28 h-28 md:w-44 md:h-44 bg-white/50 backdrop-blur-sm rounded-full p-1.5 md:p-2 z-20 border border-white">
               <div className="w-full h-full rounded-full overflow-hidden border-2 border-brand-coral">
                 <img src={IMG.homeFloral} alt="Modern luxury interior of Tarang Beauty Lounge in Bhopal" className="w-full h-full object-cover" />
               </div>
             </div>
           </div>
-          <div className="md:col-span-6 flex flex-col items-start gap-6 order-1 md:order-2">
-            <span className="bg-brand-pink text-white px-4 py-1.5 rounded-full text-[11px] font-semibold uppercase tracking-[0.2em]">
+          <div className="md:col-span-6 flex flex-col items-start gap-4 md:gap-6 order-1 md:order-2">
+            <span className="bg-brand-pink text-white px-4 py-1.5 rounded-full text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.2em]">
               Welcome to TARANG
             </span>
-            <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.02] max-w-2xl">
+            {/* Typography scaled for mobile (text-4xl) up to desktop (text-7xl) */}
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold leading-[1.1] md:leading-[1.02] max-w-2xl">
               Where Precision <span className="text-primary italic font-light">Meets</span> Luxury.
             </h1>
-            <p className="text-lg text-on-surface-variant max-w-xl">
+            <p className="text-base md:text-lg text-on-surface-variant max-w-xl">
               Experience a sanctuary of skin health and aesthetic mastery. Our clinic blends scientific rigor with the warmth of a luxury lounge to reveal your most radiant self.
             </p>
-            <div className="flex flex-wrap gap-4 mt-2">
+            {/* Buttons set to w-full on mobile, auto on desktop */}
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4 mt-2 w-full sm:w-auto">
               <Link
                 to="/contact"
-                className="bg-brand-coral text-white rounded-full px-8 py-4 text-sm font-semibold flex items-center gap-2 hover:bg-primary transition-all shadow-xl shadow-brand-coral/30"
+                className="w-full sm:w-auto justify-center bg-brand-coral text-white rounded-full px-6 py-3.5 md:px-8 md:py-4 text-sm font-semibold flex items-center gap-2 hover:bg-primary transition-all shadow-xl shadow-brand-coral/30"
               >
                 CONTACT US <span className="material-symbols-outlined text-[18px]">north_east</span>
               </Link>
               <Link
                 to="/about"
-                className="border-2 border-on-surface text-on-surface rounded-full px-8 py-4 text-sm font-semibold hover:bg-on-surface hover:text-white transition-all"
+                className="w-full sm:w-auto justify-center text-center border-2 border-on-surface text-on-surface rounded-full px-6 py-3.5 md:px-8 md:py-4 text-sm font-semibold hover:bg-on-surface hover:text-white transition-all"
               >
                 OUR STORY
               </Link>
@@ -200,17 +205,13 @@ function HomePage() {
         </section>
 
         {/* Feature Grid */}
-        <section ref={featureRef} className="bg-surface py-20 overflow-hidden">
+        <section ref={featureRef} className="bg-surface py-12 md:py-20 overflow-hidden">
           <div className="max-w-[1200px] mx-auto px-4 md:px-8">
-            {/* The Outer Container 
-              I used a specific hex color to match your image exactly. 
-              You can change this to `bg-brand-pink` if you want to strictly use your theme variables.
-            */}
-            <div className="bg-[#df5b8f] rounded-[40px] p-4 md:p-6 shadow-xl">
+            <div className="bg-[#df5b8f] rounded-[32px] md:rounded-[40px] p-4 md:p-6 shadow-xl">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {[
                   {
-                    icon: "psychology", // Standard material symbol for the head/bulb
+                    icon: "psychology", 
                     title: "Expert Hair\nStylists",
                     sub: "Master professionals specializing in Hair Botox, Keratin, and advanced hair transformations.",
                   },
@@ -220,27 +221,23 @@ function HomePage() {
                     sub: "Results-driven skin treatments and Face Botox tailored to your unique skin needs.",
                   },
                   {
-                    icon: "workspace_premium", // Standard material symbol for a crown/ribbon
+                    icon: "workspace_premium",
                     title: "Signature\nBridal Studio",
                     sub: "Feel like royalty on your special day with our expert bridal makeup and styling services.",
                   },
                 ].map((c, index) => (
                   <div
                     key={c.title}
-                    className="bg-white/10 border border-white/20 rounded-[32px] p-8 md:p-10 flex flex-col text-white transition-all duration-300 hover:bg-white/15"
-                    // This applies the popIn animation and multiplies the delay by the index (0ms, 150ms, 300ms) for a staggered entrance
+                    className="bg-white/10 border border-white/20 rounded-[24px] md:rounded-[32px] p-6 md:p-10 flex flex-col text-white transition-all duration-300 hover:bg-white/15"
                     style={{animation: featureVisible ? `popIn 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) both ${index * 150}ms` : "none", opacity: featureVisible ? 1 : 0,}}
                   >
-                    {/* White Icon Badge */}
-                    <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-[#191930] mb-8 shadow-sm">
-                      <span className="material-symbols-outlined text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+                    <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white flex items-center justify-center text-[#191930] mb-6 md:mb-8 shadow-sm">
+                      <span className="material-symbols-outlined text-2xl md:text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>
                         {c.icon}
                       </span>
                     </div>
-                    
-                    {/* Text Content */}
-                    {/* We use whitespace-pre-line so the \n in the title creates a line break just like the image */}
-                    <h3 className="text-3xl md:text-4xl font-display font-normal leading-tight mb-5 tracking-wide whitespace-pre-line">
+                    {/* Text scaled down for mobile */}
+                    <h3 className="text-2xl md:text-4xl font-display font-normal leading-tight mb-3 md:mb-5 tracking-wide whitespace-pre-line">
                       {c.title}
                     </h3>
                     <p className="opacity-90 leading-relaxed font-sans text-sm md:text-base">
@@ -254,14 +251,15 @@ function HomePage() {
         </section>
 
         {/* Services slider */}
-        <section className="py-24">
-          <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-            <div className="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-14">
+        <section className="py-16 md:py-24">
+          <div className="max-w-[1400px] mx-auto px-4 md:px-12">
+            <div className="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-10 md:mb-14">
               <div>
                 <span className="text-primary font-bold tracking-[0.25em] text-xs">CURATED SERVICES</span>
-                <h2 className="text-4xl md:text-5xl font-bold mt-3">TRANSFORMATIONS</h2>
+                {/* Scaled header */}
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mt-2 md:mt-3">TRANSFORMATIONS</h2>
               </div>
-              <div className="flex gap-3">
+              <div className="flex gap-3 hidden md:flex">
                 <button className="w-12 h-12 rounded-full border border-outline/30 flex items-center justify-center hover:bg-on-surface hover:text-white transition-all">
                   <span className="material-symbols-outlined">west</span>
                 </button>
@@ -270,22 +268,22 @@ function HomePage() {
                 </button>
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
               {[
                 { img: IMG.hydra, title: "HydraFacial Pro", sub: "Deep cleansing and hydration for instant luminous results." },
                 { img: IMG.laser, title: "Laser Therapy", sub: "Targeted treatment for pigmentation and scar reduction." },
                 { img: IMG.peel, title: "Chemical Peels", sub: "Medical-grade resurfacing for a smoother, youthful skin texture." },
               ].map((s) => (
-                <div key={s.title} className="bg-brand-cream rounded-3xl overflow-hidden group">
+                <div key={s.title} className="bg-brand-cream rounded-[24px] md:rounded-3xl overflow-hidden group">
                   <div className="aspect-video overflow-hidden">
                     <img src={s.img} alt={s.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                   </div>
-                  <div className="p-8">
-                    <h4 className="text-2xl font-bold mb-2">{s.title}</h4>
-                    <p className="text-on-surface-variant mb-8">{s.sub}</p>
+                  <div className="p-6 md:p-8">
+                    <h4 className="text-xl md:text-2xl font-bold mb-2">{s.title}</h4>
+                    <p className="text-on-surface-variant text-sm md:text-base mb-6 md:mb-8">{s.sub}</p>
                     <Link
                       to="/contact"
-                      className="inline-flex bg-white border border-brand-coral text-brand-coral px-5 py-2.5 rounded-full text-xs font-semibold items-center gap-2 group-hover:bg-brand-coral group-hover:text-white transition-all"
+                      className="inline-flex bg-white border border-brand-coral text-brand-coral px-4 py-2 md:px-5 md:py-2.5 rounded-full text-xs font-semibold items-center gap-2 group-hover:bg-brand-coral group-hover:text-white transition-all"
                     >
                       GET APPOINTMENT <span className="material-symbols-outlined text-[16px]">north_east</span>
                     </Link>
@@ -304,7 +302,7 @@ function HomePage() {
           <div className="absolute -top-20 -left-20 w-80 h-80 border-[40px] border-white/5 rounded-full" />
           <div className="absolute -bottom-20 -right-20 w-60 h-60 border-[20px] border-white/5 rounded-full" />
         
-          <div className="max-w-[1400px] mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
+          <div className="max-w-[1400px] mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 relative z-10">
             {[
               {
                 title: "Years Of Experience",
@@ -332,11 +330,11 @@ function HomePage() {
                 key={item.title}
                 className="text-center flex flex-col items-center"
               >
-                <p className="uppercase tracking-[0.25em] text-sm font-semibold opacity-80 mb-4">
+                <p className="uppercase tracking-[0.25em] text-xs md:text-sm font-semibold opacity-80 mb-3 md:mb-4">
                   {item.title}
                 </p>
         
-                <div className="text-6xl md:text-7xl font-extrabold text-primary-fixed mb-5">
+                <div className="text-5xl md:text-7xl font-extrabold text-primary-fixed mb-3 md:mb-5">
                   <CountUp
                     end={item.value}
                     startAnimation={animateMetrics}
@@ -352,53 +350,40 @@ function HomePage() {
           </div>
         </section>
 
-        {/* Testimonial
-        <section className="py-24 bg-surface-container-high">
-          <div className="max-w-[1400px] mx-auto px-6 md:px-12 text-center">
-            <span className="material-symbols-outlined text-6xl text-primary mb-6" style={{ fontVariationSettings: "'FILL' 1" }}>format_quote</span>
-            <p className="text-3xl md:text-4xl italic font-normal leading-tight max-w-4xl mx-auto">
-              "The results from their advanced skin treatment exceeded all my expectations. My skin hasn't looked this radiant in years. It truly is the premier lounge for beauty."
-            </p>
-            <div className="mt-10">
-              <span className="text-xs uppercase tracking-[0.25em] font-bold">Sophia Anderson</span>
-              <span className="block text-on-surface-variant mt-1">Lifestyle Editor</span>
-            </div>
-          </div>
-        </section> */}
         {/* Testimonial */}
-        <section className="py-24 bg-surface-container-high">
-          <div className="max-w-[1400px] mx-auto px-6 md:px-12 text-center">
+        <section className="py-16 md:py-24 bg-surface-container-high">
+          <div className="max-w-[1400px] mx-auto px-4 md:px-12 text-center">
         
             {/* Header Controls */}
-            <div className="flex items-center justify-center gap-6 md:gap-12 mb-10">
+            <div className="flex items-center justify-center gap-4 md:gap-12 mb-8 md:mb-10">
         
               <button
                 onClick={prevTestimonial}
-                className="w-14 h-14 rounded-full border border-primary/20 bg-white shadow-sm flex items-center justify-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                className="w-10 h-10 md:w-14 md:h-14 rounded-full border border-primary/20 bg-white shadow-sm flex items-center justify-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
               >
-                <span className="material-symbols-outlined">
+                <span className="material-symbols-outlined text-sm md:text-base">
                   arrow_back
                 </span>
               </button>
         
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 md:gap-3">
                 <span
-                  className="material-symbols-outlined text-4xl text-primary"
+                  className="material-symbols-outlined text-2xl md:text-4xl text-primary"
                   style={{ fontVariationSettings: "'FILL' 1" }}
                 >
                   format_quote
                 </span>
         
-                <span className="uppercase tracking-[0.3em] text-xs font-bold">
+                <span className="uppercase tracking-[0.2em] md:tracking-[0.3em] text-[10px] md:text-xs font-bold">
                   Testimonials
                 </span>
               </div>
         
               <button
                 onClick={nextTestimonial}
-                className="w-14 h-14 rounded-full border border-primary/20 bg-white shadow-sm flex items-center justify-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                className="w-10 h-10 md:w-14 md:h-14 rounded-full border border-primary/20 bg-white shadow-sm flex items-center justify-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
               >
-                <span className="material-symbols-outlined">
+                <span className="material-symbols-outlined text-sm md:text-base">
                   arrow_forward
                 </span>
               </button>
@@ -408,30 +393,31 @@ function HomePage() {
             {/* Quote */}
             <div
               key={currentTestimonial}
-              className="animate-[fadeIn_0.5s_ease]"
+              className="animate-[fadeIn_0.5s_ease] px-2"
             >
-              <p className="text-2xl md:text-4xl italic font-normal leading-tight max-w-4xl mx-auto">
+              {/* Text scaled down for mobile */}
+              <p className="text-xl sm:text-2xl md:text-4xl italic font-normal leading-relaxed md:leading-tight max-w-4xl mx-auto">
                 "{testimonials[currentTestimonial].quote}"
               </p>
         
-              <div className="mt-12">
-                <span className="text-xs uppercase tracking-[0.25em] font-bold">
+              <div className="mt-8 md:mt-12">
+                <span className="text-[10px] md:text-xs uppercase tracking-[0.25em] font-bold">
                   {testimonials[currentTestimonial].author}
                 </span>
         
-                <span className="block text-on-surface-variant mt-2">
+                <span className="block text-on-surface-variant text-sm mt-1 md:mt-2">
                   {testimonials[currentTestimonial].role}
                 </span>
               </div>
             </div>
         
             {/* Dots */}
-            <div className="flex justify-center gap-3 mt-10">
+            <div className="flex justify-center gap-2 md:gap-3 mt-8 md:mt-10">
               {testimonials.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentTestimonial(index)}
-                  className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                  className={`w-2 h-2 md:w-2.5 md:h-2.5 rounded-full transition-all duration-300 ${
                     currentTestimonial === index
                       ? "bg-primary scale-125"
                       : "bg-primary/20"
@@ -444,18 +430,18 @@ function HomePage() {
 
         
         {/* Trusted Professional Brands */}
-        <section className="py-20 bg-white overflow-hidden">
-          <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-            <div className="text-center mb-12">
-              <span className="text-xs uppercase tracking-[0.3em] text-primary font-semibold">
+        <section className="py-16 md:py-20 bg-white overflow-hidden">
+          <div className="max-w-[1400px] mx-auto px-4 md:px-12">
+            <div className="text-center mb-8 md:mb-12">
+              <span className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-primary font-semibold">
                 Trusted Professional Brands
               </span>
         
-              <h2 className="mt-4 text-3xl md:text-4xl font-bold">
+              <h2 className="mt-3 md:mt-4 text-2xl sm:text-3xl md:text-4xl font-bold px-2">
                 Products We Trust For Every Transformation
               </h2>
         
-              <p className="mt-4 text-on-surface-variant max-w-2xl mx-auto">
+              <p className="mt-3 md:mt-4 text-sm md:text-base text-on-surface-variant max-w-2xl mx-auto px-4">
                 We partner with globally recognized beauty and haircare brands to
                 deliver safe, effective, and luxurious results.
               </p>
@@ -463,13 +449,13 @@ function HomePage() {
         
             <div className="relative">
               {/* Fade Left */}
-              <div className="absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-white to-transparent" />
+              <div className="absolute left-0 top-0 z-10 h-full w-12 md:w-20 bg-gradient-to-r from-white to-transparent" />
         
               {/* Fade Right */}
-              <div className="absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-white to-transparent" />
+              <div className="absolute right-0 top-0 z-10 h-full w-12 md:w-20 bg-gradient-to-l from-white to-transparent" />
         
               <div className="overflow-hidden">
-                <div className="brand-marquee flex w-max gap-6">
+                <div className="brand-marquee flex w-max gap-4 md:gap-6">
                   {[
                     "L'Oréal Professionnel",
                     "Kérastase",
@@ -490,9 +476,10 @@ function HomePage() {
                   ].map((brand, index) => (
                     <div
                       key={index}
-                      className="min-w-[260px] h-28 rounded-2xl border border-border bg-surface shadow-sm flex items-center justify-center px-8"
+                      // Reduced mobile width and height significantly
+                      className="min-w-[180px] md:min-w-[260px] h-20 md:h-28 rounded-xl md:rounded-2xl border border-border bg-surface shadow-sm flex items-center justify-center px-4 md:px-8"
                     >
-                      <span className="text-xl md:text-2xl font-bold tracking-wide text-on-surface">
+                      <span className="text-base md:text-2xl font-bold tracking-wide text-on-surface text-center">
                         {brand}
                       </span>
                     </div>
@@ -503,12 +490,11 @@ function HomePage() {
           </div>
         </section>
         
-
         {/* Blog */}
-        <section className="py-24 px-6 md:px-12 max-w-[1400px] mx-auto">
-          <div className="flex flex-col md:flex-row justify-between md:items-center mb-12 gap-6">
-            <h2 className="text-4xl md:text-5xl font-bold">Clinical Insights</h2>
-            <Link to="/blog" className="text-primary font-bold pb-1 border-b-2 border-primary text-sm self-start md:self-auto">
+        <section className="py-16 md:py-24 px-4 md:px-12 max-w-[1400px] mx-auto">
+          <div className="flex flex-col md:flex-row justify-between md:items-center mb-8 md:mb-12 gap-4 md:gap-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">Clinical Insights</h2>
+            <Link to="/blog" className="text-primary font-bold pb-1 border-b-2 border-primary text-xs md:text-sm self-start md:self-auto">
               VIEW ALL BLOGS ↗
             </Link>
           </div>
@@ -518,14 +504,14 @@ function HomePage() {
               { img: IMG.blogB, tag: "Bridal", title: "Mastering the Timeless Bridal Aesthetic", sub: "Why less is more when it comes to your most important day..." },
               { img: IMG.blogC, tag: "Hair Care", title: "Revitalizing Color-Treated Hair", sub: "New technologies in bonding and pigment protection for 2024..." },
             ].map((b) => (
-              <article key={b.title} className="flex flex-col gap-5 group">
-                <div className="aspect-[4/5] rounded-3xl overflow-hidden">
+              <article key={b.title} className="flex flex-col gap-4 md:gap-5 group">
+                <div className="aspect-[4/5] rounded-[24px] md:rounded-3xl overflow-hidden">
                   <img src={b.img} alt={b.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <div>
-                  <span className="text-xs text-brand-pink uppercase tracking-[0.2em] font-semibold">{b.tag}</span>
-                  <h4 className="text-2xl font-bold mt-2 group-hover:text-primary transition-colors">{b.title}</h4>
-                  <p className="text-on-surface-variant mt-3">{b.sub}</p>
+                  <span className="text-[10px] md:text-xs text-brand-pink uppercase tracking-[0.2em] font-semibold">{b.tag}</span>
+                  <h4 className="text-xl md:text-2xl font-bold mt-2 group-hover:text-primary transition-colors">{b.title}</h4>
+                  <p className="text-sm md:text-base text-on-surface-variant mt-2 md:mt-3">{b.sub}</p>
                 </div>
               </article>
             ))}
