@@ -67,7 +67,7 @@ function ContactPage() {
                 {[
                   { icon: "location_on", title: "Clinical Studio", body: "124 Arera Colony, Near Bittan Market\nBhopal, MP 462016" },
                   { icon: "call", title: "Speak to Us", body: "+91 755 4230 000\n+91 989 3000 000" },
-                  { icon: "mail", title: "Online Concierge", body: "hello@karishmabeauty.com\nbookings@karishmabeauty.com" },
+                  { icon: "mail", title: "Online Concierge", body: "hello@tarang.com\nbookings@tarang.com" },
                 ].map((c) => (
                   <div key={c.title} className="group flex gap-6">
                     <div className="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-primary shrink-0 transition-all group-hover:bg-primary group-hover:text-white">

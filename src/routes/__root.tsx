@@ -1,15 +1,6 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import {
-  Outlet,
-  Link,
-  createRootRouteWithContext,
-  useRouter,
-  HeadContent,
-  Scripts,
-} from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
-
-import appCss from "../styles.css?url";
+import { QueryClient } from "@tanstack/react-query";
+import { Outlet, Link, createRootRouteWithContext, useRouter } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -73,72 +64,16 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      
-      // 1. Primary Global SEO (Fixed from Karishma to TARANG)
-      { title: "TARANG Beauty Lounge | Premium Skin & Hair Clinic in Bhopal" },
-      { name: "description", content: "Experience luxury skincare, clinical facials, and advanced hair treatments at Tarang Beauty Lounge, Bhopal's premier aesthetic clinic." },
-      
-      // 2. Open Graph (This controls the WhatsApp, Facebook, and Insta Link Cards!)
-      { property: "og:type", content: "website" },
-      { property: "og:title", content: "TARANG Beauty Lounge | Premium Skin & Hair Clinic" },
-      { property: "og:description", content: "Where clinical precision meets luxury. Advanced skin, hair & bridal services in Bhopal." },
-      // ⚠️ THE MAGIC IMAGE LINK: This must be a full URL, not just a folder path. 
-      // Update "yourdomain.com" once you launch!
-      { property: "og:image", content: "https://www.yourdomain.com/images/social-card.jpg" }, 
-      
-      // 3. Twitter / X Card Setup
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "TARANG Beauty Lounge" },
-      { name: "twitter:description", content: "Bhopal's premier aesthetic clinic." },
-      { name: "twitter:image", content: "https://www.yourdomain.com/images/social-card.jpg" },
-    ],
-    links: [
-      // Your favicon and fonts stay exactly the same here!
-      { rel: "icon", type: "image/x-icon", href: "/images/favicon.ico" },
-      { rel: "stylesheet", href: appCss },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap",
-      },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap",
-      },
-    ],
-  }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
 
-function RootShell({ children }: { children: ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
-
 function RootComponent() {
-  const { queryClient } = Route.useRouteContext();
-
   return (
-    <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+    <>
+      {/* Required: nested routing layer handles page injection natively */}
       <Outlet />
-    </QueryClientProvider>
+    </>
   );
 }
